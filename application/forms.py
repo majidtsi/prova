@@ -16,7 +16,7 @@ class PrenotaForm(forms.ModelForm):
 class OrdineForm(forms.ModelForm):
     class Meta:
         model = Piatti
-        fields = '__all__'
+        fields = ['name' ,'description','category','price','ordini']
 
 
 

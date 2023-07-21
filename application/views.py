@@ -46,7 +46,6 @@ def prenota(request):
         form = PrenotaForm(request.POST , request.FILES)
         if form.is_valid():
             myform = form.save()
-            print("ok")
             cliente=Cliente.objects.get(user=request.user)
             preno=Reservation.objects.get(id=myform.id)
             cliente.reservation=preno
@@ -57,28 +56,34 @@ def prenota(request):
 
             ord.save()
 
-            return redirect('ordine')
+            return redirect(reverse('ordine'))
 
     else:
-        form = PrenotaForm()
+        print("nooooo")
+        form1 = PrenotaForm()
 
-    return render(request,'prenota.html',{'form':form})
+    return render(request,'prenota.html',{'form':form1})
 def ordine(request):
     if request.method=='POST':
-        formm = OrdineForm(request.POST , request.FILES)
+        form = OrdineForm(request.POST , request.FILES)
 
-        if formm.is_valid():
-            myform = formm.save(commit=False)
+        if form.is_valid():
+            myform = form.save(commit=False)
             myform.ordini = request.ord
             myform.save
 
 
-            return redirect(reverse('ordine'))
+            return redirect(reverse(''))
 
     else:
         form = PrenotaForm()
 
     return render(request,'ordine.html',{'form':form})
 def prenotazione(request):
-    return render(request,'prenotazione.html')
+    cliente=Cliente.objects.get(user=request.user)
+    reservation=Reservation.objects.filter(cliente=cliente)
+    prenotazione=reservation
+    print(prenotazione)
+    context={"preno":prenotazione}
+    return render(request,'prenotazione.html',context)
 

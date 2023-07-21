@@ -26,14 +26,12 @@
                            <div class="col-sm-3">
                                </div>
                            <div class="col-sm-6">
-                                <form method="POST" enctype="multipart/form-data">
+                            <form method="post">
                             {% csrf_token %}
-                            {% bootstrap_form formm %}
-                            {% buttons %}
+                                {{form}}
+                             <button type="submit" class="btn btn-primary">Ordine</button>
 
-                                <button class="boxed-btn3 w-100" type="submit">Post Now</button>
-                            {% endbuttons %}
-                        </form>
+        </form>
 
                             </div>
 

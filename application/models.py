@@ -7,7 +7,6 @@ from django.utils.text import slugify
 
 class Cliente(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    reservation = models.ForeignKey('Reservation',on_delete=models.CASCADE,blank=True,null=True)
 
     def __str__(self):
         return self.user.username
@@ -30,6 +29,7 @@ class Reservation(models.Model):
     number_of_persons = models.IntegerField()
     date = models.DateField()
     time = models.TimeField()
+    cliente = models.ForeignKey('Cliente',on_delete=models.CASCADE,blank=True,null=True)
 
 
     def __str__(self):
